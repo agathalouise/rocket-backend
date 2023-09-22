@@ -1,7 +1,6 @@
 # rocket
 
-O rocket representa uma aplicação que gerencia o cadastro de usuarios para o cartão que concede ao titular
-ao seu titular, o uso irrestrito e sem custos do transporte coletivo.
+O rocket representa uma aplicação que gerencia o cadastro de usuarios para o cartão que concede ao seu titular, o uso irrestrito e sem custos do transporte coletivo.
 
 
 ### Collection
