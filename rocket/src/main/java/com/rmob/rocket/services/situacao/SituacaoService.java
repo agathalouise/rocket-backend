@@ -76,9 +76,17 @@ public class SituacaoService {
 		return situacao;
 	}
 
+	public void atualizaQntdSolicitacao (Long userId){
+		Situacao situacao = situacaoCadastroRepository.findByUserId(userId)
+				.orElseThrow(() -> new NoSuchElementException("Situação de cadastro não encontrada"));
+
+		situacao.setQntSolicitacoes(situacao.getQntSolicitacoes() + 1);
+		situacaoCadastroRepository.save(situacao);
+	}
+
 	public void verificaQntSolicitacoes(Long userId){
 		Situacao situacao = buscaSituacaoPorIdUser(userId);
-		if (situacao.getQntSolicitacoes() > 2) {
+		if (situacao.getQntSolicitacoes() >= 2) {
 			throw new DataIntegratyViolationException("Quantidade de solicitações excede o permitido");
 		}
 	}

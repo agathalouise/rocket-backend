@@ -10,7 +10,9 @@ import com.rmob.rocket.entities.user.model.UserUpdate;
 import com.rmob.rocket.mappers.user.UserMapper;
 import com.rmob.rocket.repositories.UserRepository;
 import com.rmob.rocket.services.exceptions.DataIntegratyViolationException;
+import com.rmob.rocket.services.imgur.ImgurService;
 import com.rmob.rocket.services.situacao.SituacaoService;
+import com.rmob.rocket.services.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,12 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	SituacaoService situacaoService;
+
+	@Autowired
+	ImgurService imgurService;
+
+	@Autowired
+	Utils utils;
 
 	@Override
 	public UserResponse findById(Long id) {
@@ -147,10 +155,6 @@ public class UserServiceImpl implements UserService {
 		return mapper.mappingListUser(repository.findAll());
 	}
 
-//	@Override
-//	public List<UserResponse> findByStatus(String status) {
-//		return mapper.mappingListUser(repository.findByStatus(status));
-//	}
 
 	@Override
 	public UserResponse findByEmail(String email) {
@@ -168,26 +172,29 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public void uploadDocs(List<MultipartFile> photos, Long idUser) {
 		User user = repository.findById(idUser)
 				.orElseThrow(() -> new NoSuchElementException(USUARIO_NAO_ENCONTRADO));
 
-		List<String> photoUri = new ArrayList<>();
+		situacaoService.verificaQntSolicitacoes(idUser);
 
+		List<String> photoUri = new ArrayList<>();
 		photos.forEach(photo -> {
 			try {
-				var fileName = photo.getOriginalFilename().substring(photo.getOriginalFilename().lastIndexOf(".") + 1);
-				photoUri.add(""); //TODO fileUploadService.upload(photo, fileName));
+				photoUri.add(imgurService.uploadImage(photo));
 
 			} catch (Exception e) {
 				throw new RuntimeException(e.getMessage());
 			}
 		});
 
-		user.setFotoPerfil(photoUri.get(1));
-		user.setIdentificacaoFrente(photoUri.get(2));
-		user.setIdentificacaoVerso(photoUri.get(3));
-		user.setComprovanteEndereco(photoUri.get(4));
+		log.info("salvando as URIs dos documentos {}", photoUri);
+		user.setFotoPerfil(photoUri.get(0));
+		user.setIdentificacaoFrente(photoUri.get(1));
+		user.setIdentificacaoVerso(photoUri.get(2));
+		user.setComprovanteEndereco(photoUri.get(3));
+		situacaoService.atualizaQntdSolicitacao(idUser);
 
 		repository.save(user);
 	}

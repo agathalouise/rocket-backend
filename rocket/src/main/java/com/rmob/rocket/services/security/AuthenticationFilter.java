@@ -16,6 +16,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private JwtService jwtService;
+
 	@Autowired
 	private UserService userService;
 

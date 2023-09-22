@@ -1,0 +1,795 @@
+{
+	"info": {
+		"_postman_id": "4b52c9e6-67e9-41d8-af92-14689344b5bd",
+		"name": "rocket",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22627192"
+	},
+	"item": [
+		{
+			"name": "Cadastro - User e Funcionario",
+			"item": [
+				{
+					"name": "Cadastrar Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Nome Completo\",\r\n    \"cpf\": \"79487084053\",\r\n    \"dataNascimento\": \"10/01/2000\",\r\n    \"nomeMae\": \"Nome Completoa mae\",\r\n    \"email\": \"45asd6@email.com\",\r\n    \"senha\": \"Senha123\",\r\n    \"cep\": \"74550-020\",\r\n    \"logradouro\": \"Nome da Rua\",\r\n    \"complemento\": \"Complemento\",\r\n    \"bairro\": \"Nome do Bairro\",\r\n    \"cidade\": \"Nome da Cidade\",\r\n    \"uf\": \"GO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/v1/rocket/cadastrar/passelivre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"v1",
+								"rocket",
+								"cadastrar",
+								"passelivre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Funcionario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Nome á Completo Funcionario\",\r\n    \"cpf\": \"79487084053\",\r\n    \"email\": \"exemplo@rocket.com\",\r\n    \"senha\": \"Senha1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/v1/rocket/cadastrar/funcionario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"v1",
+								"rocket",
+								"cadastrar",
+								"funcionario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.globals.set(\"token\", jsonData.token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"exemplo123@email.com\",\r\n    \"password\": \"Senha123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/v1/rocket/authentication",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"v1",
+								"rocket",
+								"authentication"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Imgur token - ATENCAO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.globals.set(\"tokenImgur\", jsonData.token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "redirect_uri",
+									"value": "https://www.getpostman.com/oauth2/callback",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "7521289bae7c957144f2570bdb7a95478f6291bd",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "18eb8bab84c9db6",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://api.imgur.com/oauth2/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://api.imgur.com/oauth2/authorize",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "Imgur - Postman Collection",
+									"type": "string"
+								},
+								{
+									"key": "refreshRequestParams",
+									"value": [],
+									"type": "any"
+								},
+								{
+									"key": "tokenRequestParams",
+									"value": [],
+									"type": "any"
+								},
+								{
+									"key": "authRequestParams",
+									"value": [],
+									"type": "any"
+								},
+								{
+									"key": "challengeAlgorithm",
+									"value": "S256",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "queryParams",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "SÓ É NECESSARIO SE O TOKEN Q ESTA COMO VAR NA APLICAÇAO ESTIVER EXPIRADO >ir na aba \"Authorization\" e clicar em get new access token / se precisar de login e senha no imgur é so me falar",
+							"host": [
+								"SÓ É NECESSARIO SE O TOKEN Q ESTA COMO VAR NA APLICAÇAO ESTIVER EXPIRADO >ir na aba \"Authorization\" e clicar em get new access token "
+							],
+							"path": [
+								" se precisar de login e senha no imgur é so me falar"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Oláaa,  \n  \nNa autenticação, na aba tests criei um metodo para salvar o token numa variavel global."
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Perfil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/v1/rocket/myprofile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"v1",
+								"rocket",
+								"myprofile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload docs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fotoPerfil",
+									"type": "file",
+									"src": "/C:/Users/agsantan/OneDrive - Capgemini/Pictures/Screenshots/Captura de tela_20230303_165614.png"
+								},
+								{
+									"key": "identificacaoFrente",
+									"type": "file",
+									"src": "/C:/Users/agsantan/OneDrive - Capgemini/Pictures/Screenshots/Captura de tela 2023-03-06 112550.png"
+								},
+								{
+									"key": "identificacaoVerso",
+									"type": "file",
+									"src": "/C:/Users/agsantan/OneDrive - Capgemini/Pictures/Screenshots/Captura de tela 2023-03-10 093530.png"
+								},
+								{
+									"key": "comprovanteEndereco",
+									"type": "file",
+									"src": "/C:/Users/agsantan/OneDrive - Capgemini/Pictures/Screenshots/Captura de tela 2023-03-14 174522.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8082/v1/rocket/upload/docs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"v1",
+								"rocket",
+								"upload",
+								"docs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 6,\r\n    \"nome\": \"Naruto Uzumaki\",\r\n    \"senha\": \"Senhanova\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/v1/rocket",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"v1",
+								"rocket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/v1/rocket",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"v1",
+								"rocket"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Funcionario",
+			"item": [
+				{
+					"name": "Funcoes de admin",
+					"item": [
+						{
+							"name": "Find All Users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/v1/rocket/adm/usuario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"v1",
+										"rocket",
+										"adm",
+										"usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find User by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/v1/rocket/adm/usuario?id=7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"v1",
+										"rocket",
+										"adm",
+										"usuario"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find User by Id Email",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/v1/rocket/adm/usuario?email=exemplo123@email.com",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"v1",
+										"rocket",
+										"adm",
+										"usuario"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "exemplo123@email.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Aprovar Cadastro",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 7\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/v1/rocket/adm/usuario/aprovar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"v1",
+										"rocket",
+										"adm",
+										"usuario",
+										"aprovar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reprovar Cadastro",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 8\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/v1/rocket/adm/usuario/reprovar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"v1",
+										"rocket",
+										"adm",
+										"usuario",
+										"reprovar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete User By id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/v1/rocket/adm/usuario/9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"v1",
+										"rocket",
+										"adm",
+										"usuario",
+										"9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Gerenciar Funcionario Logado",
+					"item": [
+						{
+							"name": "Perfil",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/v1/rocket/adm/myprofile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"v1",
+										"rocket",
+										"adm",
+										"myprofile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find by Email",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/v1/rocket/adm/exemplo@rocket.com",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"v1",
+										"rocket",
+										"adm",
+										"exemplo@rocket.com"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Naruto Uzumaki\",\r\n    \"email\": \"hokagelindo@rocket.com\",\r\n    \"senha\": \"Senha321\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/v1/rocket/adm",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"v1",
+										"rocket",
+										"adm"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/v1/rocket/adm",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"v1",
+										"rocket",
+										"adm"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "/health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

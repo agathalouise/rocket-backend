@@ -96,16 +96,6 @@ public class FuncionarioController {
 		return ResponseEntity.ok().body(userService.findAll());
 	}
 
-//	@GetMapping(value = "/usuario/{situacao}")
-//	@ApiOperation("Buscar usuarios filtrados pela situacao")
-//	public ResponseEntity<List<UserResponse>> findUserBySituacao(@RequestHeader("Authorization") String token,
-//																 @PathVariable String situacao) {
-//		validarFuncionario(token);
-//
-//		log.info("Iniciando a listagem de users pela situação {}", situacao);
-//		return ResponseEntity.ok().body(userService.findByStatus(situacao));
-//	}
-
 	@PostMapping("/usuario/aprovar")
 	@ApiOperation("Aprovar cadastro de um usuario por id")
 	public ResponseEntity<String> aprovarCadastro(@RequestHeader("Authorization") String token, @RequestBody Map<String, Long> id) {

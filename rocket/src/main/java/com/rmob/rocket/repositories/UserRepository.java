@@ -14,6 +14,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByEmail(String email);
 
-//	@Query("SELECT u FROM User u INNER JOIN u.situacaoCadastro s WHERE s.status = :status")
-//	List<User> findByStatus(@Param("status") String status);
 }

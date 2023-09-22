@@ -22,8 +22,6 @@ public interface UserService {
 
 	UserResponse findByEmail(String email);
 
-//	List<UserResponse> findByStatus(String status);
-
 	 User getUser(String email);
 
 	void uploadDocs(List<MultipartFile> photos, Long id) throws Exception;
