@@ -178,6 +178,8 @@ public class UserServiceImpl implements UserService {
 				.orElseThrow(() -> new NoSuchElementException(USUARIO_NAO_ENCONTRADO));
 
 		situacaoService.verificaQntSolicitacoes(idUser);
+		boolean primeiraSolicitacao = user.getFotoPerfil().equalsIgnoreCase(PENDENTE);
+		log.info("primeira Solicitação {}", primeiraSolicitacao);
 
 		List<String> photoUri = new ArrayList<>();
 		photos.forEach(photo -> {
@@ -194,7 +196,9 @@ public class UserServiceImpl implements UserService {
 		user.setIdentificacaoFrente(photoUri.get(1));
 		user.setIdentificacaoVerso(photoUri.get(2));
 		user.setComprovanteEndereco(photoUri.get(3));
-		situacaoService.atualizaQntdSolicitacao(idUser);
+		if (!primeiraSolicitacao) {
+			situacaoService.atualizaQntdSolicitacao(idUser);
+		}
 
 		repository.save(user);
 	}
